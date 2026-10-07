@@ -1,0 +1,303 @@
+<!doctype html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+        ECHO Fusion Lab
+    </title>
+
+    <link rel="stylesheet" href="/static/styles.css">
+
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- ======================== -->
+        <!-- HEADER -->
+        <!-- ======================== -->
+
+        <section class="hero">
+
+            <p class="eyebrow">
+                Multimodal Deep Learning
+            </p>
+
+            <h1>
+                ECHO:
+                Text vs Audio vs
+                Attention Fusion
+            </h1>
+
+            <p>
+                Лабораторный стенд
+                для сравнения трёх
+                моделей определения языка:
+                только текст,
+                только аудио
+                и мультимодальная
+                Attention Fusion.
+            </p>
+
+        </section>
+
+
+        <!-- ======================== -->
+        <!-- TRAINING -->
+        <!-- ======================== -->
+
+        <section class="panel">
+
+            <div class="panel-head">
+
+                <div>
+
+                    <h2>
+                        1. Обучение моделей
+                    </h2>
+
+                    <p>
+                        Все три модели
+                        обучаются на одном
+                        train/validation split.
+                    </p>
+
+                </div>
+
+                <span id="statusBadge" class="badge">
+                    не обучено
+                </span>
+
+            </div>
+
+
+            <div class="controls grid-3">
+
+                <label>
+
+                    Epochs
+
+                    <input id="epochs" type="number" min="1" max="100" value="5">
+
+                </label>
+
+
+                <label>
+
+                    Batch size
+
+                    <input id="batchSize" type="number" min="1" max="512" value="16">
+
+                </label>
+
+
+                <button id="trainBtn">
+                    Обучить и сравнить
+                </button>
+
+            </div>
+
+            <div id="trainMessage" class="message"></div>
+
+        </section>
+
+
+        <!-- ======================== -->
+        <!-- FINAL METRICS -->
+        <!-- ======================== -->
+
+        <section class="panel">
+
+            <h2>
+                2. Результаты validation
+            </h2>
+
+            <div id="metricsCards" class="cards"></div>
+
+            <div id="datasetInfo" class="muted"></div>
+
+        </section>
+
+
+        <!-- ======================== -->
+        <!-- TRAINING CHARTS -->
+        <!-- ======================== -->
+
+        <section class="panel">
+
+            <h2>
+                3. Графики обучения
+            </h2>
+
+            <p>
+                Здесь отображается
+                динамика обучения
+                всех трёх моделей
+                по эпохам.
+            </p>
+
+
+            <div class="chart-grid">
+
+                <article class="chart-card">
+
+                    <h3>
+                        Loss
+                    </h3>
+
+                    <canvas id="lossChart"></canvas>
+
+                </article>
+
+
+                <article class="chart-card">
+
+                    <h3>
+                        Validation Accuracy
+                    </h3>
+
+                    <canvas id="accuracyChart"></canvas>
+
+                </article>
+
+
+                <article class="chart-card">
+
+                    <h3>
+                        Validation Macro-F1
+                    </h3>
+
+                    <canvas id="f1Chart"></canvas>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================== -->
+        <!-- PREDICTION -->
+        <!-- ======================== -->
+
+        <section class="panel">
+
+            <h2>
+                4. Проверка
+                одного примера
+            </h2>
+
+            <p>
+                Загрузите аудио
+                и добавьте транскрипцию.
+            </p>
+
+
+            <form id="predictForm" class="predict-form">
+
+                <label>
+
+                    Audio
+
+                    <input id="audioFile" name="audio" type="file" accept="audio/*" required>
+
+                </label>
+
+
+                <label>
+
+                    Текст / transcript
+
+                    <textarea id="transcript" name="text" rows="4"
+                        placeholder="Введите транскрипцию аудио..."></textarea>
+
+                </label>
+
+
+                <button type="submit">
+                    Сравнить модели
+                </button>
+
+            </form>
+
+
+            <div id="predictionCards" class="cards"></div>
+
+
+            <div id="attentionBox"></div>
+
+        </section>
+
+
+        <!-- ======================== -->
+        <!-- EXPLANATION -->
+        <!-- ======================== -->
+
+        <section class="panel explanation">
+
+            <h2>
+                Что показывает
+                эксперимент
+            </h2>
+
+            <p>
+
+                <strong>
+                    Text-only
+                </strong>
+
+                использует только
+                транскрипцию.
+
+                <strong>
+                    Audio-only
+                </strong>
+
+                использует MFCC признаки.
+
+                <strong>
+                    Attention Fusion
+                </strong>
+
+                объединяет обе
+                модальности через
+                Multi-Head Attention.
+
+            </p>
+
+            <p>
+
+                Основные метрики:
+
+                Accuracy
+                и
+                Macro-F1.
+
+                Если fusion
+                показывает лучший
+                результат,
+                мультимодальное
+                объединение оказалось
+                полезным для этой задачи.
+
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+    <script src="/static/app.js"></script>
+
+</body>
+
+</html>

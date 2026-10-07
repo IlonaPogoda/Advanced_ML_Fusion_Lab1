@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+venv_*/
+
+# Models and artifacts
+artifacts/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Temporary
+*.tmp
+*.log
+
+data/ECHO/
+.venv/
+__pycache__/
+*.pyc

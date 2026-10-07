@@ -1,0 +1,12 @@
+.venv
+venv
+venv_*
+__pycache__
+*.pyc
+
+.git
+.gitignore
+
+artifacts/*
+
+data/ECHO/*

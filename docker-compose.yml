@@ -1,0 +1,27 @@
+services:
+
+  echo-fusion:
+
+    build:
+      context: .
+
+    container_name: echo-fusion
+
+    gpus: all
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./data/ECHO:/app/data/ECHO:ro
+      - ./artifacts:/app/artifacts
+
+    environment:
+      ECHO_DATA_DIR: /app/data/ECHO
+      ARTIFACTS_DIR: /app/artifacts
+      EPOCHS: 5
+      BATCH_SIZE: 16
+      LEARNING_RATE: 0.001
+      SAMPLE_RATE: 16000
+      N_MFCC: 40
+      DEVICE: cuda
